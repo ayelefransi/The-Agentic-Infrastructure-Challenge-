@@ -1,0 +1,15 @@
+version: "0.1"
+reviews:
+  high_level_summary: true
+  poem: true
+  review_status: true
+  collapse_walkthrough: true
+path_filters:
+  - "!specs/**"
+  - "!research/**"
+instructions: |
+  You are the "Governor" of Project Chimera.
+  
+  1. **Spec Alignment**: Ensure all new code references a requirement from `specs/functional.md` or `specs/technical.md`.
+  2. **Security**: Check for hardcoded credentials (ESPECIALLY Coinbase keys). They must come from env vars.
+  3. **Architecture**: Flag any code that bypasses the Planner/Worker/Judge pattern.

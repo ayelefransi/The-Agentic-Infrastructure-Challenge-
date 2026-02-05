@@ -1,0 +1,25 @@
+---
+description: Project Chimera Context & Rules
+globs: *
+---
+
+# Project Chimera: Autonomous Influencer Network
+
+## Project Context
+You are working on **Project Chimera**, an autonomous network of AI influencers managed by a Fractal Orchestration pattern.
+The system uses the **Model Context Protocol (MCP)** for all external interactions and a **Hierarchical Swarm (FastRender)** architecture (Planner/Worker/Judge).
+Financial autonomy is handled via **Coinbase AgentKit**.
+
+## The Prime Directive
+> **NEVER** generate code without checking the `specs/` directory first.
+> All code must be traceable back to a Functional Requirement (FR) or Technical Spec.
+
+## Workflow Rules
+1.  **Traceability**: Before writing code, explicitly state: "This change addresses FR X.X from `specs/functional.md`".
+2.  **MCP-First**: Do not write direct API calls (e.g., `requests.post('twitter.com')`). ALWAYS use or create an MCP Tool interface (`mcp_client.call_tool('twitter', 'post')`).
+3.  **TDD**: Write the failing test first.
+4.  **No Monoliths**: Respect the Planner/Worker/Judge separation.
+
+## Style Guide
+- **Python**: Type-hinted (Pydantic), AsyncIO-native.
+- **Docstrings**: Google Style.
