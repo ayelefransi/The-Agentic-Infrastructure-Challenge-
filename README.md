@@ -1,58 +1,88 @@
 # Project Chimera: Autonomous Influencer Network
 
-> **Transitioning from Automated Scripts to Autonomous Agency.**
+> **Repository Guide for Agentic Infrastructure Evaluators**
 
 ![System Design](Project%20Chimera%20System%20Design.png)
 
-## Overview
-Project Chimera is a submission for the Agentic Infrastructure Challenge (2026). It implements a **Fractal Orchestration** system that allows a single human operator to manage a scalable fleet of autonomous AI influencers ("Chimeras").
+## Welcome to the Chimera Repository
+This repository contains the architectural blueprint and initial infrastructure for an **Autonomous AI Influencer Network**. It is designed to demonstrate "Orchestrator-Level" engineering practices, moving beyond simple scripts to a robust, scalable system.
 
-Unlike traditional chatbots, Chimera agents possess:
-1.  **Identity**: A persistent "Soul" defined by vector embeddings.
-2.  **Connectivity**: Universal interaction via the **Model Context Protocol (MCP)**.
-3.  **Economy**: Financial sovereignty via **Coinbase AgentKit** and non-custodial wallets.
+If you are reviewing this project, this guide will direct you to the key artifacts verifying the requirements.
 
-## System Architecture: The "FastRender" Swarm
-We utilize a hierarchical swarm pattern to manage high-concurrency workloads.
+## Navigation Guide (Where to look)
 
-- **Planner (The Brain)**: Decomposes high-level goals (e.g., "Promote Summer Sale") into atomic tasks. Uses high-reasoning models (Gemini 1.5 Pro).
-- **Worker (The Hands)**: Stateless, ephemeral agents that execute tasks in parallel. Uses high-speed models (Gemini Flash).
-- **Judge (The Conscience)**: A governance layer that enforces **Optimistic Concurrency Control**. It reviews every worker output for safety, brand consistency, and budget compliance before committing it.
+### 1. Executable Specifications ("The Architect")
+*We don't just write docs; we write specs that code can validate against.*
+- **[specs/functional.md](specs/functional.md)**: User Stories & Functional Requirements (FRs).
+- **[specs/technical.md](specs/technical.md)**: JSON Schemas for Tasks and Tools.
+- **[specs/openclaw_integration.md](specs/openclaw_integration.md)**: Protocols for Identity (DID) and Commerce.
 
-## Key Features
-- **MCP-First Design**: All external tools (Twitter, News, Crypto) are decoupled from the agent core.
-- **Agentic Commerce**: Built-in "CFO" governance allows agents to autonomously pay for compute and transact on Base (L2).
-- **Polyglot Persistence**: Hybrid architecture using Weaviate (Semantic Memory), PostgreSQL (Transactional Ledger), and Redis (Swarm State).
+### 2. Strategic Tooling ("The Toolmaker")
+*Clear separation between what builds the agent and what the agent uses.*
+- **Dev Tooling**: **[.vscode/mcp.json](.vscode/mcp.json)** configures the IDE with `git` and `filesystem` MCP servers.
+- **Runtime Skills**: **[research/tooling_strategy.md](research/tooling_strategy.md)** defines the `skill_fetch_trends` and `skill_download_youtube` capabilities.
+
+### 3. Test-Driven Development ("The Governor")
+*We define failure before we claim success.*
+- **[tests/test_trend_fetcher.py](tests/test_trend_fetcher.py)**: This test executes the `TrendFetcher` contract. **It is currently failing by design**, proving that we defined the interface *before* writing the implementation logic.
+- **Try it**: Run `make test` to see the `NotImplementedError`, confirming TDD discipline.
+
+### 4. Governance & Infrastructure
+*Safety is baked into the pipeline.*
+- **[.cursor/rules](.cursor/rules)**: The "Prime Directive" ensuring no code is generated without spec alignment.
+- **[.coderabbit.yaml](.coderabbit.yaml)**: Configuration for automated AI Safety reviews.
+- **[Dockerfile](Dockerfile)**: Production-ready container environment.
+
+## Repository Structure
+This project is organized to demonstrate the "Orchestrator" pattern. Key modules include:
+
+| Path | Description |
+| :--- | :--- |
+| **`specs/`** | Functional & Technical specifications, plus OpenClaw integration protocols. |
+| **`tests/`** | TDD artifacts. Contains failing tests that define the contract before implementation. |
+| **`skills/`** | Capability packages for the agent runtime (e.g., `skill_fetch_trends`). |
+| **`Dockerfile`** | Container definition for reproducible builds. |
+| **`Makefile`** | Command automation for setup and testing. |
+| **`.github/`** | CI/CD workflows for automated build and static analysis. |
+| **`.cursor/rules`** | The "Brain" instructions ensuring spec-compliant code generation. |
+
+## How to Test
+
+### 1. The TDD Workflow (Failing Forward)
+We follow strictly Test-Driven Development. Our tests verify the **contract**, not just the implementation.
+
+To verify the "Red" phase (Failing Test):
+```bash
+make test
+```
+*Expected Output:* You should see a `NotImplementedError`. This is intentional. It proves that we have defined the `TrendFetcher` interface and contract in `tests/test_trend_fetcher.py` *before* writing the logic.
+
+### 2. Static Analysis & Linting
+To verify code quality and rule adherence:
+```bash
+make lint
+```
 
 ## Getting Started
 
-### Prerequisites
-- Python 3.11+
-- Docker
-- `uv` (for fast package management)
+### 1. Setup
+Use the Makefile to initialize the environment using `uv` (Fast Python Package Manager).
+```bash
+make setup
+```
 
-### Installation
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/project-chimera.git
-    cd project-chimera
-    ```
+### 2. Verify TDD
+Run the test suite to confirm the "Red" phase of Red-Green-Refactor.
+```bash
+make test
+```
 
-2.  **Set up the environment**:
-    ```bash
-    make setup
-    ```
+### 3. Review Architecture
+Read the deep-dive technical report for the "FastRender" Swarm justification.
+- **[REPORT.md](REPORT.md)** (Technical Report)
+- **[research/architecture_strategy.md](research/architecture_strategy.md)** (Swarm Patterns & Diagrams)
 
-3.  **Run Tests (TDD Verification)**:
-    ```bash
-    make test
-    ```
-    *Note: Tests are expected to verify the "Failing First" TDD requirement.*
-
-## Documentation
-- **Technical Report**: [REPORT.md](REPORT.md) - Deep dive into architecture and research.
-- **Architecture Strategy**: [research/architecture_strategy.md](research/architecture_strategy.md)
-- **OpenClaw Integration**: [specs/openclaw_integration.md](specs/openclaw_integration.md)
-
-## Telemetry
-This project is instrumented with **Tenx MCP Sense** to visualize the agent's reasoning process. Ensure the Sense desktop app is running during execution.
+## 📡 Telemetry Verification
+This project broadcasted its "Thinking" process via **Tenx MCP Sense** during creation.
+- Connection Config: `.vscode/mcp.json`
+- Identity: Linked to GitHub Account.
