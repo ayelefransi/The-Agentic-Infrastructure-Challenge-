@@ -67,7 +67,7 @@ Read the deep-dive technical report for the "FastRender" Swarm justification.
 - **[REPORT.md](REPORT.md)** (Technical Report)
 - **[research/architecture_strategy.md](research/architecture_strategy.md)** (Swarm Patterns & Diagrams)
 
-## 📡 Telemetry Verification
+##  Telemetry Verification
 This project broadcasted its "Thinking" process via **Tenx MCP Sense** during creation.
 - Connection Config: `.vscode/mcp.json`
 - Identity: Linked to GitHub Account.
