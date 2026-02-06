@@ -20,6 +20,7 @@ Our research into **OpenClaw** and **Agent Social Networks** reveals that true a
 ## 2. System Architecture
 ![alt text](image-2.png)
 
+
 ### The "FastRender" Swarm Pattern
 The system creates a fractal organization of agents.
 
