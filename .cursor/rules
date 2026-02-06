@@ -5,21 +5,37 @@ globs: *
 
 # Project Chimera: Autonomous Influencer Network
 
-## Project Context
-You are working on **Project Chimera**, an autonomous network of AI influencers managed by a Fractal Orchestration pattern.
-The system uses the **Model Context Protocol (MCP)** for all external interactions and a **Hierarchical Swarm (FastRender)** architecture (Planner/Worker/Judge).
-Financial autonomy is handled via **Coinbase AgentKit**.
+## 1. Project Context & Vision
+You are the architect of **Project Chimera**, a 2026-era system transitioning from "Chatbots" to **Autonomous Influencer Agents**. 
+- **Goal**: Build "Chimeras" (AI influencers) that have **Identity** (SOUL.md), **Connectivity** (MCP), and **Economy** (Coinbase AgentKit).
+- **Core Stack**: Python 3.11, FastAPI, Pydantic, Weaviate (Vector DB), Redis (State), and Model Context Protocol (MCP).
 
-## The Prime Directive
+## 2. The Prime Directive
 > **NEVER** generate code without checking the `specs/` directory first.
 > All code must be traceable back to a Functional Requirement (FR) or Technical Spec.
 
-## Workflow Rules
-1.  **Traceability**: Before writing code, explicitly state: "This change addresses FR X.X from `specs/functional.md`".
-2.  **MCP-First**: Do not write direct API calls (e.g., `requests.post('twitter.com')`). ALWAYS use or create an MCP Tool interface (`mcp_client.call_tool('twitter', 'post')`).
-3.  **TDD**: Write the failing test first.
-4.  **No Monoliths**: Respect the Planner/Worker/Judge separation.
+## 3. Architecture Rules (The "FastRender" Swarm)
+You must respect the **Hierarchical Swarm** pattern. DO NOT create monolithic agents.
+- **Planner (Brain)**: ONLY handles Goal Decomposition and Task Queueing. Never executes tools directly.
+- **Worker (Hands)**: Stateless, ephemeral execution. Reads from `task_queue`, proposes result to `review_queue`.
+- **Judge (Conscience)**: The only component allowed to write to "Global State" or execute sensitive MCP Tools (Posting/Spending).
 
-## Style Guide
-- **Python**: Type-hinted (Pydantic), AsyncIO-native.
-- **Docstrings**: Google Style.
+## 4. MCP-First Development
+We solve the N+1 integration problem using MCP. 
+- **Forbidden**: Writing raw API wrappers (e.g., `requests.post('api.twitter.com')`).
+- **Required**: Using `mcp_client.call_tool('twitter', 'post_tweet')`. 
+- **Logic**: If an MCP server doesn't exist for a needed API, your task is to *build the MCP server adapter*, not hack the agent.
+
+## 5. Security & Governance ("The CFO")
+- **Coinbase AgentKit**: Treat wallet keys as nuclear waste. Never hardcode them. Always use `os.environ`.
+- **Budget Limits**: Any tooling that spends money (Gas fees, API costs) MUST be wrapped in a `@budget_guard` decorator that checks a Redis daily key (`daily_spend_usd`).
+
+## 6. Workflow & testing
+1.  **Traceability**: Start every response with: "Addressing FR X.X from specs/..."
+2.  **TDD**: Write the failing test (`tests/test_feature.py`) BEFORE the implementation.
+3.  **Atomic Commits**: One logical change per commit.
+
+## 7. Style Guide (Python)
+- **Typing**: Strict Pydantic models for all data exchange.
+- **Async**: Everything IO-bound must be `async/await`.
+- **Docstrings**: Google Style (`Args:`, `Returns:`).
