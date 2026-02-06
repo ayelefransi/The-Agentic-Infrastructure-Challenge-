@@ -53,28 +53,29 @@ We follow strictly Test-Driven Development. Our tests verify the **contract**, n
 
 To verify the "Red" phase (Failing Test):
 ```bash
-make test
+pytest tests/
 ```
 *Expected Output:* You should see a `NotImplementedError`. This is intentional. It proves that we have defined the `TrendFetcher` interface and contract in `tests/test_trend_fetcher.py` *before* writing the logic.
 
 ### 2. Static Analysis & Linting
 To verify code quality and rule adherence:
 ```bash
-make lint
+uvx ruff check .
 ```
 
 ## Getting Started
 
 ### 1. Setup
-Use the Makefile to initialize the environment using `uv` (Fast Python Package Manager).
+Use `uv` (Fast Python Package Manager) or `pip` to install dependencies.
 ```bash
-make setup
+pip install uv
+uv pip install --system .
 ```
 
 ### 2. Verify TDD
 Run the test suite to confirm the "Red" phase of Red-Green-Refactor.
 ```bash
-make test
+pytest tests/
 ```
 
 ### 3. Review Architecture
