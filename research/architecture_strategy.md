@@ -78,34 +78,4 @@ A single database cannot handle the diverse needs of an autonomous agent system.
 | **Transactional State** | **PostgreSQL** | Rigid schema for User Accounts, Billing, Campaign Configuration, and Audit Logs. |
 | **Episodic/Hot State** | **Redis** | High-velocity read/write for the "Global State" of the Swarm, Task Queues (Celery/BullMQ), and short-term conversation context. |
 
-```mermaid
-erDiagram
-    PERSONA {
-        uuid id
-        string name
-        text backstory
-        vector embeddings
-    }
-    CAMPAIGN {
-        uuid id
-        string goal
-        float budget
-        timestamp start_date
-    }
-    MEMORY {
-        uuid id
-        text content
-        vector embedding
-        timestamp created_at
-    }
-    TRANSACTION {
-        uuid id
-        string tx_hash
-        float amount
-        string status
-    }
-    
-    PERSONA ||--o{ CAMPAIGN : runs
-    PERSONA ||--o{ MEMORY : recalls
-    PERSONA ||--o{ TRANSACTION : executes
-```
+![alt text](image.png)
