@@ -1,5 +1,5 @@
 import pytest
-from datetime import datetime
+
 
 # NOTE: This is a TDD test. The implementation does not exist yet.
 # We expect this to fail or we mock the interface to define the contract.
@@ -19,7 +19,7 @@ async def test_trend_fetcher_contract():
     # Act
     # We expect this to raise NotImplementedError currently, proof of TDD start
     with pytest.raises(NotImplementedError):
-        result = await fetcher.fetch_trends("crypto")
+        await fetcher.fetch_trends("crypto")
 
     # Future assertions (Mental Model):
     # assert "trends" in result
